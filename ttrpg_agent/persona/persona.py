@@ -109,48 +109,35 @@ class Persona:
 
     def plan(self, maze, personas, new_day, retrieved):
         """
-        Main cognitive function of the chain. It takes the retrieved memory and
-        perception, as well as the maze and the first day state to conduct both
-        the long term and short term planning for the persona.
+        Main cognitive function of the chain. In the TTRPG context, planning is based on narrative memory and context only.
 
         INPUT:
-          maze: Current <Maze> instance of the world.
-          personas: A dictionary that contains all persona names as keys, and the
-                    Persona instance as values.
-          new_day: This can take one of the three values.
-            1) <Boolean> False -- It is not a "new day" cycle (if it is, we would
-               need to call the long term planning sequence for the persona).
-            2) <String> "First day" -- It is literally the start of a simulation,
-               so not only is it a new day, but also it is the first day.
-            2) <String> "New day" -- It is a new day.
+          maze: (Unused, kept for compatibility; pass None)
+          personas: (Unused, kept for compatibility; pass None)
+          new_day: Indicates if it's a new narrative phase or day
           retrieved: dictionary of dictionary. The first layer specifies an event,
                      while the latter layer specifies the "curr_event", "events",
                      and "thoughts" that are relevant.
         OUTPUT
           The target action address of the persona (persona.scratch.act_address).
         """
-        return plan(self, maze, personas, new_day, retrieved)
+        return plan(self, None, None, new_day, retrieved)
 
     def execute(self, maze, personas, plan):
         """
-        This function takes the agent's current plan and outputs a concrete
-        execution (what object to use, and what tile to travel to).
+        This function takes the agent's current plan and outputs a narrative response.
 
         INPUT:
-          maze: Current <Maze> instance of the world.
-          personas: A dictionary that contains all persona names as keys, and the
-                    Persona instance as values.
-          plan: The target action address of the persona
-                (persona.scratch.act_address).
+          maze: (Unused, kept for compatibility; pass None)
+          personas: (Unused, kept for compatibility; pass None)
+          plan: The target action address of the persona (persona.scratch.act_address).
         OUTPUT:
           execution: A triple set that contains the following components:
-            <next_tile> is a x,y coordinate. e.g., (58, 9)
-            <pronunciatio> is an emoji.
-            <description> is a string description of the movement. e.g.,
-            writing her next novel (editing her novel)
-            @ double studio:double studio:common room:sofa
+            <next_tile>: (Unused, kept for compatibility)
+            <pronunciatio>: (Unused, kept for compatibility)
+            <description>: A string description of the agent's narrative response.
         """
-        return execute(self, maze, personas, plan)
+        return execute(self, None, None, plan)
 
     def reflect(self):
         """

@@ -1091,20 +1091,12 @@ def _wait_react(persona, reaction_mode):
 
 def plan(persona, maze, personas, new_day, retrieved):
     """
-    Main cognitive function of the chain. It takes the retrieved memory and
-    perception, as well as the maze and the first day state to conduct both
-    the long term and short term planning for the persona.
+    Main cognitive function of the chain. In the TTRPG context, planning is based on narrative memory and context only.
 
     INPUT:
-      maze: Current <Maze> instance of the world.
-      personas: A dictionary that contains all persona names as keys, and the
-                Persona instance as values.
-      new_day: This can take one of the three values.
-        1) <Boolean> False -- It is not a "new day" cycle (if it is, we would
-           need to call the long term planning sequence for the persona).
-        2) <String> "First day" -- It is literally the start of a simulation,
-           so not only is it a new day, but also it is the first day.
-        2) <String> "New day" -- It is a new day.
+      maze: (Unused, kept for compatibility; pass None)
+      personas: (Unused, kept for compatibility; pass None)
+      new_day: Indicates if it's a new narrative phase or day
       retrieved: dictionary of dictionary. The first layer specifies an event,
                  while the latter layer specifies the "curr_event", "events",
                  and "thoughts" that are relevant.

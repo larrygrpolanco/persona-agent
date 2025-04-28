@@ -2,9 +2,9 @@
 
 ## Current Status
 
-**Project Phase**: Planning and Initial Setup
+**Project Phase**: Narrative-Only Refactor Complete
 
-We have completed the planning phase of the project and established the Memory Bank documentation. We are now ready to begin implementation of the standalone test harness.
+The project has completed a major refactor: all maze, tile, and spatial logic has been removed. The agent is now fully narrative/text-based, processing only text input and generating narrative responses. The test harness, Persona class, and all cognitive modules (perceive, plan, execute) are now decoupled from the original simulation environment.
 
 ## What Works
 
@@ -13,85 +13,59 @@ We have completed the planning phase of the project and established the Memory B
 - ✅ Understanding of original Generative Agents architecture
 - ✅ Identification of key challenges for TTRPG adaptation
 - ✅ Implementation plan created
+- ✅ Standalone test harness for text-based agent
+- ✅ All spatial/maze logic removed from codebase
+- ✅ Perception, planning, and execution are now narrative-only
+- ✅ Test harness passes text input directly to agent's cognitive loop
 
 ## What's Left to Build
 
-### Phase 1: Standalone Test Harness (Current Focus)
+### Immediate Next Steps
 
-- [ ] Create project directory structure
-- [ ] Copy relevant code from original codebase
-- [ ] Implement mock classes for dependencies
-- [ ] Adapt Persona initialization for TTRPG roles
-- [ ] Create text input processing
-- [ ] Implement basic test loop
-- [ ] Verify memory formation and retrieval
-- [ ] Test basic cognitive cycle
+- [ ] Test the agent with various narrative inputs to surface errors related to legacy event/object expectations (e.g., code expecting `.description` on events).
+- [ ] For each error, trace the code to the source and refactor the relevant function/module to work with the new narrative event format (tuples or strings).
+- [ ] Remove any remaining legacy code or parameters that are no longer needed.
+- [ ] Begin adapting the planning and reflection systems for richer narrative and character development, now that the spatial layer is gone.
 
 ### Phase 2: TTRPG Adaptation
 
-- [ ] Replace spatial perception with text parsing
-- [ ] Adapt planning for narrative contributions
+- [ ] Enhance planning for narrative contributions and character goals
 - [ ] Implement role-specific behavior (Pilot/Child)
-- [ ] Create game state tracking
-- [ ] Enhance reflection for character development
+- [ ] Create game state tracking for ECH0
 - [ ] Improve memory retrieval for narrative relevance
 
 ### Phase 3: Refinement and Testing
 
-- [ ] Tune memory importance scoring
-- [ ] Optimize LLM prompts for TTRPG context
+- [ ] Tune memory importance scoring for narrative context
+- [ ] Optimize LLM prompts for TTRPG use
 - [ ] Implement comprehensive testing
 - [ ] Create user interface for interaction
 - [ ] Document API and usage
 
 ## Evolution of Project Decisions
 
-### Initial Approach (Current)
+### Major Milestone
 
-We've decided to start with a minimal modification approach, focusing on:
-1. Mocking dependencies rather than rewriting functionality
-2. Understanding the core cognitive loop before making substantial changes
-3. Testing each component individually
-
-This approach allows us to leverage the existing architecture while gradually adapting it for TTRPG use.
+- **Maze/Spatial Removal**: All code and dependencies related to the maze, tiles, spatial memory, and 2D navigation have been deleted or bypassed. The agent no longer expects or processes any spatial context.
+- **Narrative-Only Pipeline**: The agent's cognitive loop is now fully narrative/text-based, with all planning and execution based on memory and context from text input.
 
 ### Key Decision Points
 
-1. **Maze Dependency**: We've decided to create a comprehensive mock of the Maze class rather than removing all references to it. This will allow us to understand how it's used throughout the codebase before making more substantial changes.
-
-2. **Memory Structures**: We've decided to keep the existing memory structures (associative memory, spatial memory, scratch) initially, even though spatial memory may seem less relevant for a text-based environment. This will help us understand how these components interact before deciding what to modify or remove.
-
-3. **Cognitive Cycle**: We've decided to maintain the original cognitive cycle (perceive → retrieve → plan → reflect → execute) but adapt each component for text-based input/output rather than changing the overall architecture.
+- **Legacy Compatibility**: Some function signatures retain unused parameters (maze, personas) for compatibility, but these are always passed as None and ignored internally.
+- **Memory/Event Structures**: The agent's memory system is now narrative-focused, but some structures (e.g., spatial memory) are still present for compatibility.
 
 ## First Milestone Goal
 
-Our first milestone is to create a standalone test harness that can:
-1. Initialize a Persona with either the Pilot or Child role
-2. Accept text input describing game events
-3. Process that input through the cognitive cycle
-4. Generate appropriate responses
-5. Demonstrate memory formation and retrieval
-
-Success will be measured by the agent's ability to:
-- Store input text as memories
-- Retrieve relevant memories when needed
-- Generate responses that are consistent with its role and past experiences
-- Reflect on its experiences to form higher-level insights
+**Achieved:** The agent can now process text input, store it as memory, and generate a narrative response, with no reference to spatial logic.
 
 ## Known Issues and Risks
 
-1. **Deep Integration**: The original codebase has deep integration between components, making it challenging to isolate and adapt individual parts.
-
-2. **LLM Dependency**: The system relies heavily on LLMs, which may introduce inconsistency and require careful prompt engineering.
-
-3. **Conceptual Mapping**: Mapping concepts from a spatial simulation to a narrative context may require more substantial changes than initially anticipated.
-
-4. **Performance**: The original system was designed for a small number of agents in a controlled environment. Performance may be an issue for real-time TTRPG interaction.
+1. **Legacy Code and Event Structure**: Many parts of the codebase expect structured event objects (with attributes like `.description`), not raw tuples or strings. As a result, errors will surface in various modules (e.g., retrieve, plan, execute) when they try to access attributes that no longer exist. These must be found and refactored iteratively.
+2. **Testing and Iterative Refactor**: The system must be tested thoroughly. Expect to encounter many errors as you trace through the codebase, fixing each place where legacy expectations (attributes, object types) do not match the new narrative event format. This will be an ongoing, error-driven process due to the codebase's complexity and interdependencies.
 
 ## Next Immediate Steps
 
-1. Create the `ttrpg_agent/` directory
-2. Copy the `persona/` directory from the original codebase
-3. Create `mocks.py` with initial mock implementations
-4. Create `test_harness.py` with basic functionality
-5. Test Persona initialization with a simple role
+1. Test the agent with various narrative inputs to surface errors related to legacy event/object expectations.
+2. For each error, trace the code to the source and refactor the relevant function/module to work with the new narrative event format (tuples or strings).
+3. Remove any remaining legacy code or parameters that are no longer needed.
+4. Begin adapting the planning and reflection systems for richer narrative and character development, now that the spatial layer is gone.
