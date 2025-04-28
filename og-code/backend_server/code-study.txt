@@ -1,4 +1,4 @@
-Here is where the persona class is initilized in reverie.py
+Here is where the persona class is initilized in reverie.py:
 
         # Loading in all personas.
         init_env_file = f"{sim_folder}/environment/{str(self.step)}.json"

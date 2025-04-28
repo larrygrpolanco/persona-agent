@@ -78,6 +78,7 @@ class Persona:
         # to Python variables.
         f_scratch = f"{save_folder}/scratch.json"
         self.scratch.save(f_scratch)
+
 # TTRPG Player Agent will not have vision in this same way and anything to do with the maze will have to be reworked. Perception will be based on the current scene. I do not know if att_bandwidth will be relevant. However, retention will be important to keep the agent focused on the most relevant task at hand.
     def perceive(self, maze):
         """
