@@ -23,10 +23,10 @@ from ttrpg_agent.mocks import MockMaze, MockTime, MockPersonas, create_text_even
 def create_bootstrap_memory_folder(role: str) -> str:
     """
     Create a bootstrap memory folder for the Persona.
-    
+
     Args:
         role: The role of the Persona (Pilot or Child)
-        
+
     Returns:
         The path to the bootstrap memory folder
     """
@@ -34,26 +34,20 @@ def create_bootstrap_memory_folder(role: str) -> str:
     folder_path = f"ttrpg_agent/bootstrap_memory_{role.lower()}"
     os.makedirs(folder_path, exist_ok=True)
     os.makedirs(f"{folder_path}/bootstrap_memory", exist_ok=True)
-    
+
     return folder_path
 
 
 def initialize_spatial_memory(folder_path: str) -> None:
     """
     Initialize the spatial memory for the Persona.
-    
+
     Args:
         folder_path: The path to the bootstrap memory folder
     """
     # Create a simple spatial memory structure
-    spatial_memory = {
-        "ttrpg_world": {
-            "current_scene": {
-                "narrative_space": []
-            }
-        }
-    }
-    
+    spatial_memory = {"ttrpg_world": {"current_scene": {"narrative_space": []}}}
+
     # Write the spatial memory to a file
     with open(f"{folder_path}/bootstrap_memory/spatial_memory.json", "w") as f:
         json.dump(spatial_memory, f, indent=2)
@@ -62,79 +56,143 @@ def initialize_spatial_memory(folder_path: str) -> None:
 def initialize_associative_memory(folder_path: str, role: str) -> None:
     """
     Initialize the associative memory for the Persona.
-    
+
     Args:
         folder_path: The path to the bootstrap memory folder
         role: The role of the Persona (Pilot or Child)
     """
     # Create the associative memory directory
     os.makedirs(f"{folder_path}/bootstrap_memory/associative_memory", exist_ok=True)
-    
+
     # Create empty files for the associative memory
-    with open(f"{folder_path}/bootstrap_memory/associative_memory/events.csv", "w") as f:
+    with open(
+        f"{folder_path}/bootstrap_memory/associative_memory/events.csv", "w"
+    ) as f:
         f.write("type,created,expiration,subject,predicate,object,description\n")
-    
-    with open(f"{folder_path}/bootstrap_memory/associative_memory/thoughts.csv", "w") as f:
+
+    with open(
+        f"{folder_path}/bootstrap_memory/associative_memory/thoughts.csv", "w"
+    ) as f:
         f.write("type,created,expiration,subject,predicate,object,description\n")
-    
+
     with open(f"{folder_path}/bootstrap_memory/associative_memory/chat.csv", "w") as f:
         f.write("type,created,expiration,subject,predicate,object,description\n")
-    
+
     # Add initial memories based on the role
-    with open(f"{folder_path}/bootstrap_memory/associative_memory/events.csv", "a") as f:
+    with open(
+        f"{folder_path}/bootstrap_memory/associative_memory/events.csv", "a"
+    ) as f:
         if role.lower() == "pilot":
             # Add Pilot-specific memories
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,is,a ghost,The Pilot is a ghost of a dead mech Pilot, backed up in a tiny ECHO drive just before death.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,has,a mission,The Pilot\'s mission is to find where they fell.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,was on,a last mission,The Pilot was on their last mission when they died.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,left behind,loved ones,The Pilot left behind loved ones when they died.\n')
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,is,a ghost,The Pilot is a ghost of a dead mech Pilot, backed up in a tiny ECHO drive just before death.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,has,a mission,The Pilot\'s mission is to find where they fell.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,was on,a last mission,The Pilot was on their last mission when they died.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Pilot,left behind,loved ones,The Pilot left behind loved ones when they died.\n'
+            )
         elif role.lower() == "child":
             # Add Child-specific memories
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,found,an ECHO drive,The Child found an ECHO drive while playing among the wreckage of giant mechs of war.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,lives in,a peaceful land,The Child lives in a land at peace, where scars of a great war have healed over the decades.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,plays among,mech wreckage,The Child plays among the wreckage of giant mechs of war.\n')
-            f.write(f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,met,a Pilot ghost,The Child met a ghost of a dead mech Pilot, backed up in a tiny ECHO drive.\n')
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,found,an ECHO drive,The Child found an ECHO drive while playing among the wreckage of giant mechs of war.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,lives in,a peaceful land,The Child lives in a land at peace, where scars of a great war have healed over the decades.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,plays among,mech wreckage,The Child plays among the wreckage of giant mechs of war.\n'
+            )
+            f.write(
+                f'event,{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")},,Child,met,a Pilot ghost,The Child met a ghost of a dead mech Pilot, backed up in a tiny ECHO drive.\n'
+            )
 
 
 def initialize_scratch(folder_path: str, role: str) -> None:
     """
     Initialize the scratch memory for the Persona.
-    
+
     Args:
         folder_path: The path to the bootstrap memory folder
         role: The role of the Persona (Pilot or Child)
     """
-    # Create a simple scratch memory structure
+    # NOTE: The following fields are required for compatibility with the current Persona/Scratch codebase.
+    # Many are legacy fields from the original simulation (spatial, schedule, etc.) and should be removed
+    # in a future refactor once the codebase is decoupled from them.
+
     scratch = {
+        # --- Core identity and narrative state ---
         "curr_time": datetime.datetime.now().strftime("%B %d, %Y, %H:%M:%S"),
-        "curr_tile": (0, 0),
+        "curr_tile": (0, 0),  # Legacy: spatial
+        "vision_r": 8,  # Legacy: spatial
+        "att_bandwidth": 8,  # Legacy: spatial
+        "retention": 8,
+        "concept_forget": 100,  # Required by Scratch class
+        "daily_plan_req": "",
         "name": role,
         "first_name": role,
         "last_name": "",
         "age": 30 if role.lower() == "pilot" else 10,
-        "innate": "determined, stoic, nostalgic" if role.lower() == "pilot" else "curious, adventurous, empathetic",
+        "innate": (
+            "determined, stoic, nostalgic"
+            if role.lower() == "pilot"
+            else "curious, adventurous, empathetic"
+        ),
         "learned": "",
-        "currently": f"seeking final resting place" if role.lower() == "pilot" else f"helping the Pilot find their final resting place",
+        "currently": (
+            f"seeking final resting place"
+            if role.lower() == "pilot"
+            else f"helping the Pilot find their final resting place"
+        ),
         "lifestyle": "",
         "living_area": "ECHO drive" if role.lower() == "pilot" else "village",
         "occupation": "former mech Pilot" if role.lower() == "pilot" else "child",
+        # --- Planning and scheduling (legacy, required for now) ---
         "daily_plan": [],
         "curr_day_schedule": [],
         "planned_path": [],
+        # --- Cognitive/reflective parameters (required by codebase) ---
+        "daily_reflection_time": 180,
+        "daily_reflection_size": 5,
+        "overlap_reflect_th": 4,
+        "kw_strg_event_reflect_th": 10,
+        "kw_strg_thought_reflect_th": 9,
+        "recency_w": 1,
+        "relevance_w": 1,
+        "importance_w": 1,
+        "recency_decay": 0.99,
+        "importance_trigger_max": 150,
+        "importance_trigger_curr": 150,
+        "importance_ele_n": 0,
+        "thought_count": 5,
+        # --- Action and interaction state (required by codebase) ---
+        "daily_req": [],
+        "f_daily_schedule": [],
+        "f_daily_schedule_hourly_org": [],
         "chat": "",
         "chatting_with": "",
         "chatting_with_buffer": {},
+        "chatting_end_time": "",
+        "act_path_set": False,
+        "planned_path": [],
         "act_address": "",
-        "act_obj_str": "",
+        "act_obj_str": "",  # Legacy: may be renamed in future
         "act_description": "",
         "act_pronunciatio": "",
         "act_event": "",
+        "act_obj_description": "",
+        "act_obj_pronunciatio": "",
         "act_obj_event": "",
         "act_start_time": "",
         "act_duration": 0,
         "act_status": "",
         "act_obj_status": "",
         "act_block_reason": "",
+        # --- Conversation state (required by codebase) ---
         "conversation_with": "",
         "conversation_contexts": [],
         "conversation_history": [],
@@ -165,7 +223,7 @@ def initialize_scratch(folder_path: str, role: str) -> None:
         "conversation_response_obj_status": "",
         "conversation_response_block_reason": "",
     }
-    
+
     # Write the scratch memory to a file
     with open(f"{folder_path}/bootstrap_memory/scratch.json", "w") as f:
         json.dump(scratch, f, indent=2)
@@ -174,66 +232,62 @@ def initialize_scratch(folder_path: str, role: str) -> None:
 def initialize_persona(role: str) -> Tuple[Persona, MockMaze, MockTime, MockPersonas]:
     """
     Initialize a Persona with the given role.
-    
+
     Args:
         role: The role of the Persona (Pilot or Child)
-        
+
     Returns:
         A tuple of (Persona, MockMaze, MockTime, MockPersonas)
     """
     # Create the bootstrap memory folder
     folder_path = create_bootstrap_memory_folder(role)
-    
+
     # Initialize the memory structures
     initialize_spatial_memory(folder_path)
     initialize_associative_memory(folder_path, role)
     initialize_scratch(folder_path, role)
-    
+
     # Create the mock objects
     mock_maze = MockMaze()
     mock_time = MockTime()
     mock_personas = MockPersonas()
-    
+
     # Create the Persona
     persona = Persona(role, folder_path)
-    
+
     return persona, mock_maze, mock_time, mock_personas
 
 
-def process_text_input(persona: Persona, mock_maze: MockMaze, mock_personas: MockPersonas, 
-                      mock_time: MockTime, text: str) -> str:
+def process_text_input(
+    persona: Persona,
+    mock_maze: MockMaze,
+    mock_personas: MockPersonas,
+    mock_time: MockTime,
+    text: str,
+) -> str:
     """
     Process text input through the Persona's cognitive cycle.
-    
+
     Args:
         persona: The Persona to process the input
         mock_maze: The MockMaze object
         mock_personas: The MockPersonas object
         mock_time: The MockTime object
         text: The text input
-        
+
     Returns:
         The Persona's response
     """
     # Create an event from the text
     event = create_text_event(text)
-    
-    # Add the event to the mock maze
-    mock_maze.add_event_from_tile(event, persona.scratch.curr_tile)
-    
-    # Update the Persona's current time
-    persona.scratch.curr_time = mock_time.get_current_time()
-    
+
     # Run the Persona's cognitive cycle
-    perceived = persona.perceive(mock_maze)
+    perceived = persona.perceive(event)
     retrieved = persona.retrieve(perceived)
-    plan = persona.plan(mock_maze, mock_personas, False, retrieved)
+    plan = persona.plan(None, None, False, retrieved)
     persona.reflect()
-    next_tile, pronunciatio, description = persona.execute(mock_maze, mock_personas, plan)
-    
-    # Advance the mock time
-    mock_time.advance_time(minutes=5)
-    
+    _, _, description = persona.execute(None, None, plan)
+
     # Return the Persona's response
     return description
 
@@ -243,25 +297,32 @@ def main():
     Main function for the test harness.
     """
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description="Test harness for the TTRPG Generative Agent")
-    parser.add_argument("--role", type=str, choices=["pilot", "child"], default="pilot",
-                        help="The role of the Persona (Pilot or Child)")
+    parser = argparse.ArgumentParser(
+        description="Test harness for the TTRPG Generative Agent"
+    )
+    parser.add_argument(
+        "--role",
+        type=str,
+        choices=["pilot", "child"],
+        default="pilot",
+        help="The role of the Persona (Pilot or Child)",
+    )
     args = parser.parse_args()
-    
+
     # Initialize the Persona
     persona, mock_maze, mock_time, mock_personas = initialize_persona(args.role)
-    
+
     print(f"Initialized {args.role.capitalize()} Persona")
     print("Enter text input to process through the Persona's cognitive cycle")
     print("Enter 'quit' to exit")
     print("Enter 'memory' to view the Persona's memory")
     print()
-    
+
     # Main loop
     while True:
         # Get input from the user
         text = input("> ")
-        
+
         # Check for special commands
         if text.lower() == "quit":
             break
@@ -273,10 +334,12 @@ def main():
             print("\nAssociative Memory (Chats):")
             print(persona.a_mem.get_str_seq_chats())
             continue
-        
+
         # Process the input
-        response = process_text_input(persona, mock_maze, mock_personas, mock_time, text)
-        
+        response = process_text_input(
+            persona, mock_maze, mock_personas, mock_time, text
+        )
+
         # Print the response
         print(f"\n{persona.name}: {response}\n")
 

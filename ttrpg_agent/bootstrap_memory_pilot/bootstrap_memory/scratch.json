@@ -1,9 +1,11 @@
 {
-  "curr_time": "April 28, 2025, 11:08:31",
+  "curr_time": "April 28, 2025, 11:35:42",
   "curr_tile": [
     0,
     0
   ],
+  "vision_r": 8,
+  "att_bandwidth": 8,
   "name": "pilot",
   "first_name": "pilot",
   "last_name": "",

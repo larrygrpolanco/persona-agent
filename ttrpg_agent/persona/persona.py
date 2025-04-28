@@ -80,33 +80,17 @@ class Persona:
         self.scratch.save(f_scratch)
 
 # TTRPG Player Agent will not have vision in this same way and anything to do with the maze will have to be reworked. Perception will be based on the current scene. I do not know if att_bandwidth will be relevant. However, retention will be important to keep the agent focused on the most relevant task at hand.
-    def perceive(self, maze):
+    def perceive(self, event):
         """
-        This function takes the current maze, and returns events that are
-        happening around the persona. Importantly, perceive is guided by
-        two key hyper-parameter for the  persona: 1) att_bandwidth, and
-        2) retention.
-
-        First, <att_bandwidth> determines the number of nearby events that the
-        persona can perceive. Say there are 10 events that are within the vision
-        radius for the persona -- perceiving all 10 might be too much. So, the
-        persona perceives the closest att_bandwidth number of events in case there
-        are too many events.
-
-        Second, the persona does not want to perceive and think about the same
-        event at each time step. That's where <retention> comes in -- there is
-        temporal order to what the persona remembers. So if the persona's memory
-        contains the current surrounding events that happened within the most
-        recent retention, there is no need to perceive that again. xx
+        This function takes a narrative event (text input) and returns it as a perceived event.
+        In the TTRPG context, perception is simply recording what was told to the agent.
 
         INPUT:
-          maze: Current <Maze> instance of the world.
+          event: A narrative event (e.g., a tuple or string representing what the agent perceives)
         OUTPUT:
-          a list of <ConceptNode> that are perceived and new.
-            See associative_memory.py -- but to get you a sense of what it
-            receives as its input: "s, p, o, desc, persona.scratch.curr_time"
+          a list containing the perceived event(s)
         """
-        return perceive(self, maze)
+        return [event]
 
     def retrieve(self, perceived):
         """
