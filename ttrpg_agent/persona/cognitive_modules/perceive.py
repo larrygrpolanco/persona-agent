@@ -27,16 +27,16 @@ def generate_poig_score(persona, event_type, description):
         ]
 
 
-def perceive(persona, maze):
+def perceive(persona, event):
     """
-    Perceives events around the persona and saves it to the memory, both events
-    and spaces.
+    Perceives a narrative event (text input) and returns it as a perceived event.
+    In the TTRPG context, perception is simply recording what was told to the agent.
 
-    We first perceive the events nearby the persona, as determined by its
-    <vision_r>. If there are a lot of events happening within that radius, we
-    take the <att_bandwidth> of the closest events. Finally, we check whether
-    any of them are new, as determined by <retention>. If they are new, then we
-    save those and return the <ConceptNode> instances for those events.
+    INPUT:
+      persona: An instance of <Persona> that represents the current persona.
+      event: A narrative event (e.g., a tuple or string representing what the agent perceives)
+    OUTPUT:
+      ret_events: a list containing the perceived event(s)
 
     INPUT:
       persona: An instance of <Persona> that represents the current persona.
