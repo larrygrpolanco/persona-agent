@@ -1,0 +1,34 @@
+# Breakdown: perceive.py (Perception Module)
+
+## Purpose
+This module defines the "Perceive" module for generative agents. In the original simulation, it determines what events and spaces the agent can perceive based on spatial proximity, vision radius, and attention bandwidth. It then stores new events in memory and triggers updates to the agent's state.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. perceive(persona, maze)
+- Gathers nearby tiles and events based on the agent's current tile and vision radius.
+- Stores perceived spaces and objects in the agent's spatial memory tree.
+- Selects the closest events (up to attention bandwidth) and checks if they are new (not in recent memory).
+- Adds new events to associative memory, including event description, keywords, embedding, and poignancy.
+- Handles special cases for chat events and updates reflection triggers.
+
+- *TTRPG Use*: Most of this logic is not relevant for a TTRPG pawn agent, as there is no spatial environment or tile-based perception. However, the general pattern of processing input, extracting relevant events, and storing them in memory is still important. For TTRPG, perception should be based on narrative input (scene description, dialogue, GM narration, etc.), not spatial proximity.
+
+### 2. generate_poig_score(persona, event_type, description)
+- Assigns an importance score to events, thoughts, or chats using LLM prompts.
+- *TTRPG Use*: Useful for prioritizing which narrative events or inputs are most significant for the agent.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- The concept of processing input, extracting relevant events, and storing them in memory.
+- The use of poignancy scoring to prioritize important narrative events.
+- The structure for adding new events to associative memory.
+
+### Worth Removing/Refactoring
+- All logic tied to spatial proximity, tiles, vision radius, and physical movement.
+- Any references to maze, collision maps, or tile coordinates.
+- Replace with logic for parsing narrative input, extracting key events, and updating memory based on story context.
+
+## Summary
+The perceive module is mostly simulation-specific and should be heavily refactored for a TTRPG pawn agent. The main idea to preserve is the process of extracting relevant events from input and storing them in memory, with importance scoring for prioritization. All spatial and tile-based logic should be removed and replaced with narrative input processing.

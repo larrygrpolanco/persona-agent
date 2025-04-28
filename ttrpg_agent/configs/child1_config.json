@@ -1,0 +1,15 @@
+{
+    "name": "Lila",
+    "type": "child",
+    "background": {
+        "age": 12,
+        "activity_when_found": "school field trip",
+        "relationship": "siblings"
+    },
+    "relationships": {
+        "pilot": {
+            "trust": 0.4,
+            "curiosity": 0.95
+        }
+    }
+}

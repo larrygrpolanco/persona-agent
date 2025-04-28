@@ -1,0 +1,39 @@
+# Breakdown: gpt_structure.py (LLM API Wrapper & Prompt Infrastructure)
+
+## Purpose
+This module provides wrapper functions for calling OpenAI's GPT APIs (ChatGPT, GPT-4, and legacy GPT-3). It standardizes how prompts are sent, how responses are validated/cleaned, and how embeddings are generated. It is the core interface between the agent's cognitive modules and the LLM.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. API Request Functions
+- **ChatGPT_single_request, ChatGPT_request, GPT4_request, GPT_request**: Send a prompt to the specified OpenAI model and return the response.
+  - *TTRPG Use*: Essential for all LLM-driven agent cognition (dialogue, planning, reflection, etc.).
+
+### 2. Safe/Validated Response Functions
+- **ChatGPT_safe_generate_response, GPT4_safe_generate_response, safe_generate_response**: Send a prompt, validate/clean the response, and retry if needed. Support for fail-safe outputs and custom validation/cleanup.
+  - *TTRPG Use*: Ensures robust, reliable LLM outputs for agent cognition, even when the LLM is inconsistent.
+
+### 3. Prompt Generation
+- **generate_prompt**: Loads a prompt template from file and fills in input variables.
+  - *TTRPG Use*: Central to all prompt engineering for agent behavior, enabling flexible, reusable prompt templates.
+
+### 4. Embedding Generation
+- **get_embedding**: Calls OpenAI's embedding API to get a vector for a text string.
+  - *TTRPG Use*: Enables semantic memory retrieval and context matching for narrative play.
+
+### 5. Utility
+- **temp_sleep**: Adds a delay between API calls to avoid rate limits.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- All API request and safe response functions (for robust LLM interaction)
+- Prompt template loading and variable substitution
+- Embedding generation for memory/context retrieval
+
+### Worth Removing/Refactoring
+- Any legacy GPT-3 code not needed for your LLM provider
+- Any unused or redundant validation/cleanup logic
+
+## Summary
+This module is essential for any LLM-driven agent. It provides the foundation for prompt engineering, robust LLM interaction, and semantic memory retrieval. For a TTRPG pawn agent, it should be preserved and adapted as needed for your LLM provider and prompt engineering needs.

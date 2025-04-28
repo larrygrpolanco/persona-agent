@@ -1,0 +1,4 @@
+# Core dependencies
+python>=3.8
+openai
+python-dotenv

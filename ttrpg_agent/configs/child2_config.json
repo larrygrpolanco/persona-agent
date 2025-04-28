@@ -1,0 +1,15 @@
+{
+    "name": "Arin",
+    "type": "child",
+    "background": {
+        "age": 10,
+        "activity_when_found": "scavenging for scrap",
+        "relationship": "best friends"
+    },
+    "relationships": {
+        "pilot": {
+            "trust": 0.7,
+            "curiosity": 0.85
+        }
+    }
+}

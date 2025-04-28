@@ -1,0 +1,39 @@
+# Breakdown: run_gpt_prompt.py (LLM Prompt Orchestration & Cognitive Prompt Library)
+
+## Purpose
+This module defines all the "run_gpt_prompt" functions, which generate, validate, and send specific prompt types to the LLM for each cognitive function (planning, reflection, conversation, etc.). It is the main interface between the agent's cognitive modules and the LLM, encapsulating prompt engineering and response handling for each agent behavior.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. Prompt-Oriented Cognitive Functions
+- Each function (e.g., `run_gpt_prompt_wake_up_hour`, `run_gpt_prompt_daily_plan`, `run_gpt_prompt_task_decomp`, `run_gpt_prompt_action_sector`, etc.) is responsible for:
+  - Assembling the prompt input (using agent state, memory, and templates)
+  - Loading the appropriate prompt template
+  - Sending the prompt to the LLM (via `safe_generate_response` or similar)
+  - Validating and cleaning up the response
+  - Returning the result in a structured format
+
+- *TTRPG Use*: The general pattern is highly relevant for any LLM-driven agent. However, most of the current prompt functions are simulation-specific (e.g., daily planning, spatial actions) and should be replaced with narrative-focused prompt types (e.g., "generate next utterance", "summarize relationship", "reflect on recent events", etc.).
+
+### 2. Prompt Engineering Infrastructure
+- Handles fail-safe responses, retries, and custom validation/cleanup for each prompt type.
+- Centralizes all prompt template usage, making it easy to update or swap out prompt engineering strategies.
+
+### 3. Embedding and Keyword Extraction
+- Functions for extracting keywords, generating embeddings, and mapping narrative content to memory structures.
+  - *TTRPG Use*: Useful for semantic memory retrieval and context matching.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- The overall pattern of prompt-oriented cognitive functions (input assembly, template loading, LLM call, validation/cleanup, structured output)
+- The infrastructure for retries, fail-safes, and validation
+- Embedding and keyword extraction functions
+
+### Worth Removing/Refactoring
+- All simulation-specific prompt types (wake-up hour, daily plan, spatial actions, etc.)
+- Any prompt logic tied to physical simulation or time-based routines
+- Replace with narrative-focused prompt types relevant to TTRPG play (dialogue, reflection, relationship, world knowledge, etc.)
+
+## Summary
+This module is a core part of the agent's LLM orchestration and prompt engineering. For a TTRPG pawn agent, the structure and infrastructure should be preserved, but the prompt types and templates should be refactored to focus on narrative, dialogue, and story-driven cognition.

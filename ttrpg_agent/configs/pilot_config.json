@@ -1,0 +1,17 @@
+{
+    "name": "Echo-7",
+    "type": "pilot",
+    "background": {
+        "unit": "Shadow Mars Division",
+        "serial_number": "XJ-7",
+        "last_mission": "Orbital defense of Titan colony",
+        "loved_most": "My crewmates on the starship Axiom",
+        "origin": "Mars Federation"
+    },
+    "relationships": {
+        "children": {
+            "trust": 0.6,
+            "curiosity": 0.9
+        }
+    }
+}

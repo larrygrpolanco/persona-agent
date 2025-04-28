@@ -1,0 +1,35 @@
+# Breakdown: global_methods.py (Utility & Helper Functions)
+
+## Purpose
+This module provides utility and helper functions used throughout the project. It includes file and folder management, CSV reading/writing, basic statistics, and some general-purpose helpers.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. File and Folder Management
+- **create_folder_if_not_there, check_if_file_exists, copyanything**: Ensure folders/files exist, copy files/folders.
+  - *TTRPG Use*: Useful for saving/loading agent state, managing memory banks, or handling campaign data.
+
+### 2. CSV and Data Handling
+- **write_list_of_list_to_csv, write_list_to_csv_line, read_file_to_list, read_file_to_set, get_row_len, find_filenames**: Read/write CSVs, get file info, find files by suffix.
+  - *TTRPG Use*: Useful for logging, exporting/importing agent data, or managing structured campaign data.
+
+### 3. Math and Statistics
+- **average, std**: Compute average and standard deviation.
+  - *TTRPG Use*: Rarely needed, but could be useful for analytics or debugging.
+
+### 4. Miscellaneous
+- **random, string, time, datetime, numpy, math, shutil, os, sys**: Standard library imports for general utility.
+  - *TTRPG Use*: General-purpose, may be useful for various agent or campaign management tasks.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- File/folder management and CSV/data handling functions (for agent state, logs, campaign data)
+- Any general-purpose utility functions that are not simulation-specific
+
+### Worth Removing/Refactoring
+- Any unused or simulation-specific helpers
+- Any code tied to the simulation's file structure or naming conventions
+
+## Summary
+This module is a general-purpose utility library. For a TTRPG pawn agent, the file/folder management and data handling functions are most relevant, especially for saving/loading agent state and managing campaign data. Simulation-specific helpers can be removed or ignored.
