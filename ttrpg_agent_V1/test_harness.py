@@ -16,8 +16,8 @@ from typing import Dict, List, Tuple, Any, Optional
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import the Persona class and mocks
-from ttrpg_agent.persona.persona import Persona
-from ttrpg_agent.mocks import MockMaze, MockTime, MockPersonas, create_text_event
+from ttrpg_agent_V1.persona.persona import Persona
+from ttrpg_agent_V1.mocks import MockMaze, MockTime, MockPersonas, create_text_event
 
 
 def create_bootstrap_memory_folder(role: str) -> str:
