@@ -6,6 +6,8 @@ Description: Defines the MemoryTree class that serves as the agents' spatial
 memory that aids in grounding their behavior in the game world.
 """
 
+# This is going to have to be simplifed considering my TTRPG Player Agent will not be in a 2D tiled space instead they will have to take their spacial ques from the game master and any flavor text they are given. Alternatively they can ask the game master for more information about the world and specific space around them.
+
 import json
 import sys
 
