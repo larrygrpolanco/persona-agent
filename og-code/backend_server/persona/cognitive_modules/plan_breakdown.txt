@@ -1,0 +1,50 @@
+# Breakdown: plan.py (Planning Module)
+
+## Purpose
+This module implements the agent's planning logic, including both long-term (daily) and short-term (next action) planning. In the original simulation, this is heavily tied to daily schedules, physical locations, and time-based routines. For a TTRPG pawn agent, the focus should shift to narrative goals, intentions, and context-driven next actions.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. Daily and Hourly Planning (Simulation-Specific, Remove)
+- **generate_wake_up_hour, generate_first_daily_plan, generate_hourly_schedule**: All focused on simulating a daily routine (wake up, eat, work, sleep).
+  - *TTRPG Use*: Not relevant. TTRPG agents do not need to simulate daily life or time-based routines.
+
+### 2. Task Decomposition (Potentially Useful)
+- **generate_task_decomp**: Decomposes a high-level task into subtasks and durations.
+  - *TTRPG Use*: Could be adapted for breaking down narrative goals or complex actions into steps, but should be decoupled from time/duration.
+
+### 3. Action/Location Selection (Simulation-Specific, Remove/Adapt)
+- **generate_action_sector, generate_action_arena, generate_action_game_object**: Selects physical locations and objects for actions, based on the simulated environment.
+  - *TTRPG Use*: Not relevant unless the TTRPG has a spatial component. For most narrative play, actions should be tied to story context, not coordinates.
+
+### 4. Action Representation
+- **generate_action_pronunciatio, generate_action_event_triple, generate_act_obj_desc, generate_act_obj_event_triple**: Converts actions into emoji, structured events, or descriptions.
+  - *TTRPG Use*: Useful for representing actions in a structured way, but should be narrative-focused.
+
+### 5. Conversation and Reaction Planning
+- **generate_convo, generate_convo_summary, generate_decide_to_talk, generate_decide_to_react**: Handles planning for conversations and reactions to other agents.
+  - *TTRPG Use*: Highly relevant. These functions can be adapted for deciding when to engage in dialogue, how to summarize conversations, and when to react to narrative events.
+
+### 6. Long-Term Planning and Identity Revision (Simulation-Specific, Remove/Adapt)
+- **revise_identity, _long_term_planning**: Updates the agent's identity and daily plan based on recent events.
+  - *TTRPG Use*: Could be adapted for character development, but should not be tied to daily cycles.
+
+### 7. Main Planning Loop
+- **plan(persona, maze, personas, new_day, retrieved)**: Orchestrates the planning process, including long-term planning, action selection, and reaction to perceived events.
+  - *TTRPG Use*: The structure is useful, but should be refactored to focus on narrative context, not simulation time or spatial events.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- Conversation and reaction planning (for dialogue and narrative engagement)
+- Task decomposition (for breaking down complex narrative actions)
+- Action representation (for structured, narrative-focused actions)
+- The overall structure of planning as a response to context and memory
+
+### Worth Removing/Refactoring
+- All daily/hourly schedule logic, wake-up times, and time-based routines
+- Physical location/object selection tied to a simulated environment
+- Simulation-specific triggers and state management
+
+## Summary
+The planning module contains valuable logic for conversation, reaction, and action representation, all of which are relevant for a TTRPG pawn agent. However, the majority of the code is focused on simulating daily life in a physical world, which should be removed or heavily refactored. The new focus should be on narrative-driven planning, context-aware action selection, and dynamic engagement with the story and other characters.

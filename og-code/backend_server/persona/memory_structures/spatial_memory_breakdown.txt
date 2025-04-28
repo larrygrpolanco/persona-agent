@@ -1,0 +1,29 @@
+# Breakdown: spatial_memory.py (Spatial/World Knowledge Module)
+
+## Purpose
+This module implements the agent's spatial memory as a hierarchical tree of worlds, sectors, arenas, and objects. In the original simulation, this is used to ground the agent's behavior in a 2D tiled environment, enabling navigation and interaction with physical spaces and objects.
+
+## Key Class & Functions & Relevance for TTRPG Pawn Agent
+
+### 1. MemoryTree Class
+- **tree**: A nested dictionary representing the world, sectors, arenas, and objects.
+  - *TTRPG Use*: The hierarchical structure could be adapted to represent narrative locations, important places, or world knowledge as described by the GM or in flavor text.
+- **print_tree**: Recursively prints the tree structure for debugging or visualization.
+- **save**: Serializes the tree to disk.
+- **get_str_accessible_sectors, get_str_accessible_sector_arenas, get_str_accessible_arena_game_objects**: Methods for summarizing accessible locations and objects at various levels of the hierarchy.
+  - *TTRPG Use*: These could be adapted to help the agent recall or describe known locations, but should be decoupled from physical navigation and instead reflect narrative/world knowledge.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- The idea of a hierarchical world knowledge structure (e.g., locations, important objects, narrative places).
+- Methods for summarizing or describing known locations, if adapted for narrative context.
+- The ability to update or expand the tree as the agent learns about new places from the GM or story.
+
+### Worth Removing/Refactoring
+- All logic tied to 2D tiles, physical navigation, or simulation-specific addresses.
+- Any assumptions about the agent's ability to "see" or move through space.
+- Replace all spatial queries with narrative/world knowledge queries (e.g., "What do I know about the library?" instead of "What arenas are in this sector?").
+
+## Summary
+The spatial memory module is mostly unnecessary for a TTRPG pawn agent, as there is no physical environment to navigate. However, the concept of a hierarchical world knowledge structure could be adapted to help the agent track important narrative locations, objects, or world facts as described by the GM or in flavor text. The main adaptation needed is to remove all simulation-specific logic and focus on narrative/world knowledge representation.

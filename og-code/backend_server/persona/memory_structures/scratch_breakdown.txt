@@ -1,0 +1,43 @@
+# Breakdown: scratch.py (Short-Term/Working Memory Module)
+
+## Purpose
+This module implements the agent's short-term memory ("scratch" space), which tracks the agent's current state, planning variables, and immediate context. It is essential for managing what the agent is currently doing, its focus, and its conversational state.
+
+## Key Class & Functions & Relevance for TTRPG Pawn Agent
+
+### 1. Scratch Class
+- **Persona Hyperparameters**: Includes vision, attention bandwidth, and retention. (Simulation-specific, can be removed for TTRPG.)
+- **World Information**: Tracks current time, current location/tile, and daily plan requirements. (Time/location can be replaced with narrative context.)
+- **Identity**: Stores name, age, traits, lifestyle, and other identity information.
+  - *TTRPG Use*: Useful for maintaining character identity, traits, and current narrative state.
+- **Reflection Variables**: Parameters for triggering and managing reflection. (Can be simplified for narrative triggers.)
+- **Planning**: Tracks daily goals, schedules, and decomposed actions. (Daily schedule logic is simulation-specific and can be removed.)
+- **Current Action**: Tracks the current action's address, start time, duration, description, emoji, and event triple.
+  - *TTRPG Use*: Useful for tracking the agent's current narrative action, intention, or conversational state.
+- **Conversation State**: Tracks who the agent is chatting with, the chat log, buffers, and end time.
+  - *TTRPG Use*: Essential for managing ongoing conversations and dialogue context.
+- **Pathfinding/Movement**: Tracks planned paths and path status. (Simulation-specific, can be removed.)
+
+### 2. Methods
+- **save**: Serializes the scratch state to disk.
+- **get_f_daily_schedule_index, get_f_daily_schedule_hourly_org_index**: Used for time-based schedule management. (Simulation-specific, can be removed.)
+- **get_str_iss**: Returns a summary of the agent's identity and current state.
+  - *TTRPG Use*: Useful for generating prompts or summaries for the agent.
+- **Action Management**: Methods for summarizing, checking, and updating the current action.
+  - *TTRPG Use*: Useful for managing the agent's current focus and for generating narrative output.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- Identity and trait fields (for character roleplay and prompt generation)
+- Current action and conversational state (for narrative focus and dialogue)
+- Methods for summarizing identity and current action
+- Reflection and planning variables (if adapted for narrative/event-based triggers)
+
+### Worth Removing/Refactoring
+- All vision, tile, and pathfinding logic
+- All daily/hourly schedule and time-based planning logic
+- Simulation-specific fields and methods
+
+## Summary
+The scratch module is important for a TTRPG pawn agent's ability to track its current narrative state, identity, and conversational context. The main adaptations needed are to remove simulation-specific logic and focus on narrative-driven state management, character traits, and dialogue tracking.

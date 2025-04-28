@@ -1,0 +1,39 @@
+# Breakdown: retrieve.py (Memory Retrieval Module)
+
+## Purpose
+This module implements the agent's memory retrieval logic. It is responsible for surfacing relevant events and thoughts from the agent's associative memory, using a combination of recency, importance (poignancy), and semantic relevance (embedding similarity). This is a core mechanism for making the agent's behavior context-aware and consistent over time.
+
+## Key Functions & Relevance for TTRPG Pawn Agent
+
+### 1. retrieve(persona, perceived)
+- For each perceived event, retrieves related events and thoughts from the agent's associative memory.
+- Returns a dictionary mapping each perceived event to its relevant context (current event, related events, related thoughts).
+  - *TTRPG Use*: Useful for surfacing memories and thoughts relevant to the current scene, dialogue, or narrative event. Enables the agent to "remember" and act on past experiences in a story-driven way.
+
+### 2. new_retrieve(persona, focal_points, n_count=30)
+- For each focal point (a string describing a topic, event, or thought), retrieves the most relevant nodes (memories) from the agent's associative memory.
+- Uses a weighted combination of recency, importance, and relevance (embedding similarity) to score and rank memories.
+- Returns a dictionary mapping each focal point to a list of top relevant memory nodes.
+  - *TTRPG Use*: Critical for enabling the agent to recall relevant backstory, relationships, or prior events when responding to prompts, making plans, or engaging in conversation.
+
+### 3. Scoring and Normalization Functions
+- **cos_sim(a, b)**: Computes cosine similarity between two embedding vectors (for semantic relevance).
+- **normalize_dict_floats(d, target_min, target_max)**: Normalizes dictionary values to a target range.
+- **top_highest_x_values(d, x)**: Returns the top x key-value pairs with the highest values.
+- **extract_recency, extract_importance, extract_relevance**: Compute recency, poignancy, and relevance scores for memory nodes.
+  - *TTRPG Use*: These functions underpin the agent's ability to prioritize memories that are recent, important, or contextually relevant to the current narrative.
+
+## What to Keep, Adapt, or Remove for TTRPG Agent
+
+### Worth Keeping/Adapting
+- The weighted retrieval mechanism (recency, importance, relevance) is highly valuable for a TTRPG agent, as it allows the agent to surface the most story-relevant memories and avoid context drift.
+- Embedding-based relevance (cosine similarity) is useful for matching narrative topics, character names, or story events.
+- The ability to retrieve both events and thoughts supports rich, context-aware responses and planning.
+
+### Worth Removing/Refactoring
+- Any logic tied to physical simulation (e.g., "perceived" events based on vision or spatial proximity) should be replaced with narrative or dialogue-based perception.
+- The retrieval weights (currently hardcoded) could be simplified or made configurable for different TTRPG scenarios.
+- Debug print statements and simulation-specific details can be removed or replaced with logging as needed.
+
+## Summary
+The retrieval module is essential for a TTRPG pawn agent. Its approach to surfacing relevant memories based on recency, importance, and semantic similarity is directly applicable to narrative play, enabling the agent to act with continuity and depth. The main adaptation needed is to ensure that "perception" and "focal points" are defined in terms of narrative/game context rather than physical simulation.
